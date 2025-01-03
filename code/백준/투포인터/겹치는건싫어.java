@@ -24,40 +24,27 @@ class 겹치는건싫어 {
 
     public static int solution(int N, int K, int[] arr) {
         int answer = 0;
-        int length = 0;
         int start = 0;
         int end = 0;
-        int tmp = 0;
         int[] count = new int[100001];
+        count[arr[0]]++;
 
-        while(end < N) {
-            System.out.println("start : " + start + " end : " + end);
+        while(end < N - 1) {
             if (count[arr[end]] > K) {
                 count[arr[start]]--;
                 start++;
-                length--;
             } else {
-                count[arr[end]]++;
                 end++;
-                length++;
+                count[arr[end]]++;
             }
 
-            if (answer < length) {
-                    answer = length;
+            if (count[arr[end]] > K) {
+                continue;
+            } else if (answer < end - start) {
+                answer = end - start;
             }
-
-            System.out.println("length : " + length + " tmp : " + tmp);
         }
-        
-        return answer;
+
+        return answer + 1;
     }
 }
-
-
-
-
-
-
-
-
-
